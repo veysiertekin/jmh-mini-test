@@ -31,14 +31,29 @@
 
 package org.sampletest;
 
+import java.util.ArrayList;
+
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 
+@State(Scope.Benchmark)
 public class MyBenchmark {
+	final int SIZE = 100000;
 
-    @Benchmark
-    public void testMethod() {
-        // This is a demo/sample template for building your JMH benchmarks. Edit as needed.
-        // Put your benchmark code here.
-    }
+	@Benchmark
+	public void createList() {
+		ArrayList<Integer> list = new ArrayList<Integer>(SIZE);
+		for (int i = 0; i < SIZE; i++) {
+			list.add(i);
+		}
+	}
 
+	@Benchmark
+	public void createArray() {
+		Integer[] list = new Integer[SIZE];
+		for (int i = 0; i < SIZE; i++) {
+			list[i] = i;
+		}
+	}
 }
